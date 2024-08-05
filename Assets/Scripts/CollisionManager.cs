@@ -2,14 +2,22 @@ using System.Collections.Generic;
 
 public class CollisionManager
 {
-    private Dictionary<Cube, Platform> _cubeByPlatform = new Dictionary<Cube, Platform>();
+    private Dictionary<Cube, HashSet<Platform>> _cubeCollisions = new Dictionary<Cube, HashSet<Platform>>();
 
-    public bool TryRegistryFirstCollision(Cube cube, Platform platform)
+    public bool TryRegistryNewPlatformCollision(Cube cube, Platform platform)
     {
-        if (_cubeByPlatform.ContainsKey(cube))
+        if (_cubeCollisions.ContainsKey(cube) == false)
+            _cubeCollisions[cube] = new HashSet<Platform>();
+
+        if (_cubeCollisions[cube].Contains(platform))
             return false;
 
-        _cubeByPlatform[cube] = platform;
+        _cubeCollisions[cube].Add(platform);
         return true;
+    }
+
+    public void Reset(Cube cube)
+    {
+        _cubeCollisions.Remove(cube);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 public class ObjectsPool : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
+    [SerializeField] private Transform _container;
+
     private Queue<Cube> _pool;
 
     private void Awake()
@@ -13,13 +15,17 @@ public class ObjectsPool : MonoBehaviour
 
     public Cube GetObject()
     {
-        if (_pool.Count == 0)
+        Debug.Log(_pool.Count);
+
+        if (_pool.Count > 0)
         {
-            var cube = Instantiate(_cubePrefab);
-            return cube;
+            var @object = _pool.Dequeue();
+            @object.gameObject.SetActive(true);
+            return @object;
         }
 
-        return _pool.Dequeue();
+        var cube = Instantiate(_cubePrefab, _container);
+        return cube;
     }
 
     public void PutObject(Cube cube)
