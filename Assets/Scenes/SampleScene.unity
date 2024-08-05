@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65fd99a4770ce264189e48fc84769f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnTime: 0.5
+  _spawnTime: 0.25
   _pool: {fileID: 1158714866}
   _colorizer: {fileID: 243408694}
   _spawnArea: {fileID: 98904127}
