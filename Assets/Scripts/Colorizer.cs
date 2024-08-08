@@ -2,16 +2,8 @@ using UnityEngine;
 
 public class Colorizer : MonoBehaviour
 {
-    public Color Colorize(Cube cube)
+    public void Colorize(Material material)
     {
-        var defaultColor = Color.white;
-
-        if (cube.TryGetComponent(out Renderer renderer))
-        {
-            defaultColor = renderer.material.color;
-            renderer.material.color = Random.ColorHSV();
-        }
-
-        return defaultColor;
+        material.color = Random.ColorHSV();
     }
 }

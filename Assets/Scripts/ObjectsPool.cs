@@ -15,17 +15,14 @@ public class ObjectsPool : MonoBehaviour
 
     public Cube GetObject()
     {
-        Cube cube = null;
-
         if (_pool.Count > 0)
         {
-            cube = _pool.Dequeue();
+            var cube = _pool.Dequeue();
             cube.gameObject.SetActive(true);
             return cube;
         }
 
-        cube = Instantiate(_cubePrefab, _container);
-        return cube;
+        return Instantiate(_cubePrefab, _container);
     }
 
     public void PutObject(Cube cube)

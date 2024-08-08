@@ -32,7 +32,7 @@ public class Cube : MonoBehaviour
 
             if (_isColorChanged == false)
             {
-                _colorizer.Colorize(this);
+                _colorizer.Colorize(_renderer.material);
                 _isColorChanged = true;
             }
         }
