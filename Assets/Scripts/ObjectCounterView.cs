@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using CountingObject = CountingObjects.CountingObject;
 
 [RequireComponent(typeof(ObjectCounter))]
 public class ObjectCounterView : MonoBehaviour
@@ -17,12 +18,6 @@ public class ObjectCounterView : MonoBehaviour
     private int _active;
     private int _spawned;
     private int _instantiated;
-
-    private enum CountingObject
-    {
-        Cube = 0,
-        Bomb
-    }
 
     private void Start()
     {

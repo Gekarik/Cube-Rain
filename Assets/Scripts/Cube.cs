@@ -37,6 +37,14 @@ public class Cube : MonoBehaviour, IDestroyable
             }
         }
     }
+    public void Reset()
+    {
+        _isColorChanged = false;
+        _renderer.material.color = _defaultColor;
+
+        if (_deathTimer != null)
+            StopCoroutine(_deathTimer);
+    }
 
     private void StartDeathTimer()
     {
@@ -54,14 +62,5 @@ public class Cube : MonoBehaviour, IDestroyable
         var wait = new WaitForSeconds(time);
         yield return wait;
         Destroyed?.Invoke(this);
-    }
-
-    public void Reset()
-    {
-        _isColorChanged = false;
-        _renderer.material.color = _defaultColor;
-
-        if (_deathTimer != null)
-            StopCoroutine(_deathTimer);
     }
 }

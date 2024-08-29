@@ -32,14 +32,6 @@ public class Bomb : MonoBehaviour, IDestroyable
             _deathTimer = StartCoroutine(SetDeathTime());
     }
 
-    private IEnumerator SetDeathTime()
-    {
-        _renderSwitcher.SetMaterialRenderingMode(_renderer.material, RenderSwitcher.RenderingMode.Fade);
-        yield return _fadeRoutine = StartCoroutine(_colorizer.Fade(_renderer.material, _maxlLfeTime));
-        _exploser.Explose();
-        Destroyed?.Invoke(this);
-    }
-
     public void Reset()
     {
         if (_deathTimer != null)
@@ -56,7 +48,15 @@ public class Bomb : MonoBehaviour, IDestroyable
 
         ResetAlpha(_renderer.material);
     }
-    
+
+    private IEnumerator SetDeathTime()
+    {
+        _renderSwitcher.SetMaterialRenderingMode(_renderer.material, RenderSwitcher.RenderingMode.Fade);
+        yield return _fadeRoutine = StartCoroutine(_colorizer.Fade(_renderer.material, _maxlLfeTime));
+        _exploser.Explose();
+        Destroyed?.Invoke(this);
+    }
+
     private float GetRandomLifetTime() => UnityEngine.Random.Range(_minLifeTime, _maxlLfeTime);
     
     private void ResetAlpha(Material material)
