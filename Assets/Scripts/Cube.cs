@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody), typeof(Colorizer), typeof(Renderer))]
-public class Cube : MonoBehaviour
+public class Cube : MonoBehaviour, IDestroyable
 {
     [SerializeField] private float _minCubeLifeTime;
     [SerializeField] private float _maxCubeLifeTime;
@@ -15,7 +15,7 @@ public class Cube : MonoBehaviour
     private Coroutine _deathTimer;
     private Colorizer _colorizer;
 
-    public event Action<Cube> Destroyed;
+    public event Action<IDestroyable> Destroyed;
 
     private void Start()
     {
