@@ -1,57 +1,17 @@
 using TMPro;
 using UnityEngine;
-using CountingObject = CountingObjects.CountingObject;
 
-[RequireComponent(typeof(ObjectCounter))]
-public class ObjectCounterView : MonoBehaviour
+public class ObjectCounterView<T> : MonoBehaviour where T : Component, IDestroyable
 {
-    [SerializeField] private TextMeshProUGUI _activeField;
+    [SerializeField] private ObjectPool<T> _pool;
     [SerializeField] private TextMeshProUGUI _spawnedField;
+    [SerializeField] private TextMeshProUGUI _activeField;
     [SerializeField] private TextMeshProUGUI _instantiatedField;
-    [SerializeField] private CountingObject _countingObject;
-    
-    private const string Active = nameof(Active);
-    private const string Spawned = nameof(Spawned);
-    private const string Instantiated = nameof(Instantiated);
-
-    private ObjectCounter _objectCounter;
-    private int _active;
-    private int _spawned;
-    private int _instantiated;
-
-    private void Start()
-    {
-        _objectCounter = GetComponent<ObjectCounter>();
-    }
 
     private void Update()
     {
-        UpdateCounters();
-        UpdateUI();
-    }
-
-    private void UpdateCounters()
-    {
-        switch (_countingObject)
-        {
-            case CountingObject.Cube:
-                _spawned = _objectCounter.GetSpawnedCount<Cube>();
-                _active = _objectCounter.GetActiveCount<Cube>();
-                _instantiated = _objectCounter.GetInsantiatedCount<Cube>();
-                break;
-
-            case CountingObject.Bomb:
-                _spawned = _objectCounter.GetSpawnedCount<Bomb>();
-                _active = _objectCounter.GetActiveCount<Bomb>();
-                _instantiated = _objectCounter.GetInsantiatedCount<Bomb>();
-                break;
-        }
-    }
-
-    private void UpdateUI()
-    {
-        _activeField.text = $"{Active}: {_active}";
-        _spawnedField.text = $"{Spawned}: {_spawned}";
-        _instantiatedField.text = $"{Instantiated}: {_instantiated}";
+        _spawnedField.text = $" Spawned: {_pool.Spawned}";
+        _activeField.text = $" Active: {_pool.GetActiveCount()}"; 
+        _instantiatedField.text = $" Instantiated: {_pool.Instantiated}";
     }
 }

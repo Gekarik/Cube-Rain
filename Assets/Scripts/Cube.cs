@@ -37,6 +37,7 @@ public class Cube : MonoBehaviour, IDestroyable
             }
         }
     }
+
     public void Reset()
     {
         _isColorChanged = false;
